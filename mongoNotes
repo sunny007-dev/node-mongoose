@@ -1,0 +1,151 @@
+MongoDB Start command
+ 
+ 	mongosh or mongo  ---> for start shell where we will working
+ 	
+ 	show dbs  --->> for show all the databases
+ 	
+ 	use sunnyDB --->> for use already created db or create new one and then switched on it.
+ 	
+ 	CREATE
+ 	db.sunnydata.insertOne({name:"mongoDb",type: "Database", videos: 80, active: true})  --->> For insert single record in document
+	db.sunnydata.insertMany([{},{},{}]) -->>> For insert many records in document
+	
+ 	db -->> for show active database in mongodb.
+ 	
+ 	show collections  ---->> for show how many collection in a Database
+ 	
+ 	db.sunnydata.find()  ---->>> for show how many document in a collection 
+ 	
+ 	sunnyDB> db.sunnydata.find()
+		[
+		  {
+		    _id: ObjectId("641095c0500dd64dd31987a4"),
+		    name: 'mongoDb',
+		    type: 'Database',
+		    videos: 80,
+		    active: true
+		  },
+		  {
+		    _id: ObjectId("6410987aa7fd625947d80fa1"),
+		    name: 'Angular',
+		    type: 'Frontend',
+		    video: 1000,
+		    active: false
+		  },
+		  {
+		    _id: ObjectId("6410a1b3a7fd625947d80fa2"),
+		    name: 'React',
+		    type: 'Frontend',
+		    video: 1005,
+		    active: false
+		  },
+		  {
+		    _id: ObjectId("6410a1b3a7fd625947d80fa3"),
+		    name: 'Devops',
+		    type: 'Cloud',
+		    video: 0,
+		    active: false
+		  },
+		  {
+		    _id: ObjectId("6410aa73a7fd625947d80fa4"),
+		    name: 'javascript',
+		    type: 'frontend',
+		    active: true
+		  }
+		]
+
+ 	
+ 	
+ 	READ
+ 	db.sunndata.find({name:"mongoDb"}) --->>> For show only specific document that having mongoDb name
+
+ 	db.sunnydata.find({name:"mongoDb"}, {name:1})  ---->>>> for show only single name field with id because of projection ({name:1})
+ 	db.sunnydata.find({name:"mongoDb"}, {name:0})  ---->> Show all the field without name field with id because of projection({name:0})
+	Example ==>>	sunnyDB> db.sunnydata.find({name:"Tanvi"},{name:0})
+ 	
+			[
+			  {
+			    _id: ObjectId("6411f020abdef276d8e59312"),
+			    qualification: 'MCA',
+			    occupation: 'Web Developer'
+			  }
+			]
+
+	db.sunnydata.find({name:"mongoDb"}, {_id:0,name:1}) ---->> Show only name field without id
+	
+	Example --->>	sunnyDB> db.sunnydata.find({name:"Tanvi"},{_id:0,name:1})
+			[ { name: 'Tanvi' } ]
+
+	
+	db.sunnydata.find({active:true}).limit(1) ---->> for show only one active field true document
+	
+	Example -->>	sunnyDB> db.sunnydata.find({qualification:"MCA"}).limit(2)
+		[
+		  {
+		    _id: ObjectId("6411f020abdef276d8e59310"),
+		    name: 'sunny',
+		    qualification: 'MCA',
+		    occupation: 'Webapps Developer'
+		  },
+		  {
+		    _id: ObjectId("6411f020abdef276d8e59311"),
+		    name: 'Ranjeet',
+		    qualification: 'MCA',
+		    occupation: 'Full Stack'
+		  }
+		]
+
+	db.sunnydata.findOne({type:"Frontend"}) --->>> for show only one type of Frontend document
+	
+	db.sunnydata.find({type:"Frontend"}).limit(1).skip(1)  --->> Show type:Frontend after skiping first one
+	Example  ==>>	sunnyDB> db.sunnydata.find({qualification:"MCA"}).limit(2).skip(1)
+			[
+			  {
+			    _id: ObjectId("6411f020abdef276d8e59311"),
+			    name: 'Ranjeet',
+			    qualification: 'MCA',
+			    occupation: 'Full Stack'
+			  },
+			  {
+			    _id: ObjectId("6411f020abdef276d8e59312"),
+			    name: 'Tanvi',
+			    qualification: 'MCA',
+			    occupation: 'Web Developer'
+			  }
+			]
+
+	
+	
+	UPDATE
+	
+	db.sunnydata.updateOne({name:"javascript"}, {$set: {name: "Full Stack"}}) --- >> for use to update specific one field
+	
+	db.sunnydata.updateMany({type:"Frontend"}, {$set: {active:true}}) --->>> for update many value by single query
+	    
+	  Example ==>  sunnyDB> db.sunnydata.updateOne({name:"sunny"},{$set:{occupation:"Webapps Developer"}})
+		{
+		  acknowledged: true,
+		  insertedId: null,
+		  matchedCount: 1,
+		  modifiedCount: 1,
+		  upsertedCount: 0
+		}
+
+	
+	
+	DELETE
+	
+	db.sunnydata.deleteOne({name:"Devops"}) ----->>> Delete One document in collection
+	
+	db.sunnydata.deleteMany({})  --->>> For delete complete collections
+
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
